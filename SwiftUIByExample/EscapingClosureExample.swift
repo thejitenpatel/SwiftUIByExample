@@ -11,16 +11,19 @@ class EscapingViewModel: ObservableObject {
     
     @Published var text: String = "Hello"
     
+    // Helper method
     func getData() {
         downloadDataFromInternet { [weak self] data in
             self?.text = data
         }
     }
     
+    // Synchronous method
     func downloadData() -> String {
         return "New Data"
     }
     
+    // Escaping closure method
     func downloadDataFromInternet(completionHandler: @escaping (_ data: String) -> ()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             return completionHandler("Downloaded data from Internet")
